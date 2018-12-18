@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shsxt.crm.dao.UserMapper" >
+
+    <!--通过用户名查询用户-->
+    <select id="queryUserByName" resultType="user" parameterType="string">
+        SELECT id ,user_name as userName,user_pwd as userPwd,true_name as trueName,email,phone,is_valid as isValid,create_date as createDate,update_date as updateDate
+        FROM t_user WHERE is_valid=1 AND user_name=#{userName}
+    </select>
+</mapper>
