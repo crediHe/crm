@@ -2,9 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.shsxt.crm.dao.UserMapper" >
 
+    <sql id="base">
+        id,user_name as userName,user_pwd as userPwd,true_name as trueName,
+      email,phone,is_valid as isValid,create_date as createDate,update_date as updateDate
+    </sql>
+
     <!--通过用户名查询用户-->
     <select id="queryUserByName" resultType="user" parameterType="string">
-        SELECT id ,user_name as userName,user_pwd as userPwd,true_name as trueName,email,phone,is_valid as isValid,create_date as createDate,update_date as updateDate
+        SELECT <include refid="base"/>
         FROM t_user WHERE is_valid=1 AND user_name=#{userName}
     </select>
+    <!--通过id查询用户-->
+    <select id="queryById" parameterType="int" resultType="user">
+        SELECT <include refid="base"/>
+        FROM t_user WHERE is_valid=1 and id=#{id}
+    </select>
+    <!--修改密码-->
+    <update id="updateUserPwd">
+        UPDATE t_user SET user_pwd=#{userPwd} WHERE id=#{id}
+    </update>
 </mapper>
