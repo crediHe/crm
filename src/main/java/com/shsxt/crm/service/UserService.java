@@ -1,5 +1,6 @@
 package com.shsxt.crm.service;
 
+import com.shsxt.crm.base.BaseService;
 import com.shsxt.crm.dao.UserMapper;
 import com.shsxt.crm.model.UserInfo;
 import com.shsxt.crm.po.User;
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Service;
  * Created by Administrator on 2018/12/18.
  */
 @Service
-public class UserService {
+public class UserService extends BaseService<User>{
     @Autowired
     private UserMapper userMapper;
 
