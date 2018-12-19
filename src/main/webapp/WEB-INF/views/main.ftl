@@ -12,7 +12,7 @@
                 <img alt="logo" src="${ctx}/images/bglogo.png">
             </td>
             <td valign="bottom" align="right" width="50%">
-                <font size="3">&nbsp;&nbsp;<strong>欢迎：</strong>${(user.userName)!"sxt"}</font>【${(user.trueName)!"sxt" }】【${(user.roleName)!"系统管理员" }】
+                <font size="3">&nbsp;&nbsp;<strong>欢迎：</strong>${(user.userName)!"sxt"}</font>【${(user.trueName)!"sxt" }】<#--【${(user.roleName)!"系统管理员" }】-->
             </td>
         </tr>
     </table>
@@ -64,7 +64,7 @@
 	 上海尚学堂智能科技有限公司 的icp备案号 （沪ICP备16053543号）
 </div>
 
-<div id="dlg" class="easyui-dialog" style="width:400px;height:250px;padding: 10px 20px"
+<div id="dlg" class="easyui-dialog" style="width:400px;height:250px;padding: 10px 20px" title="修改密码"
      closed="true" buttons="#dlg-buttons">
 
     <form id="fm" method="post">
@@ -93,6 +93,6 @@
     <a href="javascript:modifyPassword()" class="easyui-linkbutton" iconCls="icon-ok">保存</a>
     <a href="javascript:closePasswordModifyDialog()" class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
 </div>
-
+<script src="${ctx}/js/main.js"></script>
 </body>
 </html>

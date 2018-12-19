@@ -6,3 +6,5 @@
 <script>
     var ctx = "${ctx}";
 </script>
+<script src="${ctx}/js/jquery.cookie.js"></script>
+<script src="${ctx}/js/common.js"></script>

@@ -12,3 +12,23 @@ function openTab(text, url, iconCls){
     }
 }
 
+/* 退出 */
+function logout() {
+    /***
+     * 1. 清除cookie
+     * 2. 跳转到登陆页
+     * */
+    // easyUI的easyUI Confirm 确认框
+    $.messager.confirm('来自Crm', '您想要退出该系统吗？', function(r){
+        if (r){
+            // 退出操作;
+            $.removeCookie("userIdStr");
+            $.removeCookie("userName");
+            $.removeCookie("realName");
+
+            //跳转登陆页
+            window.location.href = ctx +'/index';
+        }
+    });
+
+}
