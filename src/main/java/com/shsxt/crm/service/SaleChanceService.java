@@ -35,7 +35,6 @@ public class SaleChanceService extends BaseService<SaleChance> {
          * 3. 补全参数,比如: 创建时间 创建人 更新时间
          * 4. 执行操作
          * */
-        System.out.println("6666666666666666666666666666666666");//2
         checkSaleChanceParams(saleChance.getCustomerName(),
                 saleChance.getLinkMan(), saleChance.getLinkPhone());
 
@@ -44,13 +43,25 @@ public class SaleChanceService extends BaseService<SaleChance> {
             //添加
             User user = userMapper.queryById(userId);
             saleChance.setCreateMan(user.getUserName());//创建人
-            saleChance.setState(0);//未分配
+
             saleChance.setDevResult(0);//未开发
             saleChance.setIsValid(1);//账户有效
             saleChance.setCreateDate(new Date());//创建时间
             saleChance.setUpdateDate(new Date());//更新时间
+
+            /***
+             * 判断有没有选分配人
+             * 1) 有: 设置分配时间  state=1
+             * 2) 没有: 不设置分配时间 state=0
+             * */
+            String assignMan = saleChance.getAssignMan();
+            if(StringUtils.isBlank(assignMan)){
+                saleChance.setState(0);//未分配
+            }else{
+                saleChance.setState(1);//已分配
+                saleChance.setAssignTime(new Date());//分配时间
+            }
             AssertUtil.isTrue(saleChanceMapper.save(saleChance)<1,"营销机会添加失败");
-            System.out.println("service执行...");
         }else{
             //更新
         }

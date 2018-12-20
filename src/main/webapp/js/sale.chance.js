@@ -80,6 +80,8 @@ function saveOrUpdateSaleChance() {
                     $('#dlg').dialog("close");
                     // 刷新数据
                     $('#dg').datagrid('load');
+                    //清空表单数据
+                    $('#fm').form('clear');
                 });
             }else{
                 $.messager.alert('来自Crm',data.msg,'error');
