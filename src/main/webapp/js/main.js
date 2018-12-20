@@ -27,7 +27,7 @@ function logout() {
 
 // 修改密码
 function openPasswordModifyDialog() {
-    $('#dlg').dialog('open')
+    $('#dlg').dialog('open');
 }
 
 function modifyPassword() {
@@ -50,4 +50,8 @@ function modifyPassword() {
             }
         }
     })
+}
+
+function closePasswordModifyDialog() {
+    $('#dlg').dialog('close');
 }

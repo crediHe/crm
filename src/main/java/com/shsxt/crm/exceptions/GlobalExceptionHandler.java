@@ -84,13 +84,14 @@ public class GlobalExceptionHandler implements HandlerExceptionResolver {
                 return null;
             }
         }
-        return mv;
+        return null;
     }
 
     private ModelAndView createDefModelAndView(HttpServletRequest request) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("error");
         mv.addObject("ctx", request.getContextPath());
+        mv.addObject("uri", request.getRequestURI());
         return mv;
     }
 }
