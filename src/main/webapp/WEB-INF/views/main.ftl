@@ -1,6 +1,6 @@
 <html>
 <head>
-    <#include "common.ftl" >
+<#include "common.ftl" >
     <title>Crm | 后台主页</title>
     <script type="text/javascript" src="${ctx}/js/main.js"></script>
 </head>
@@ -12,7 +12,7 @@
                 <img alt="logo" src="${ctx}/images/bglogo.png">
             </td>
             <td valign="bottom" align="right" width="50%">
-                <font size="3">&nbsp;&nbsp;<strong>欢迎：</strong>${(user.userName)!"sxt"}</font>【${(user.trueName)!"sxt" }】<#--【${(user.roleName)!"系统管理员" }】-->
+                <font size="3">&nbsp;&nbsp;<strong>欢迎：</strong>${(user.userName)!"sxt"}</font>【${(user.trueName)!"sxt" }】【${(user.roleName)!"系统管理员" }】
             </td>
         </tr>
     </table>
@@ -27,8 +27,8 @@
 <div region="west" style="width: 200px" title="导航菜单" split="true">
     <div class="easyui-accordion" data-options="fit:true,border:false">
         <div title="营销管理" data-options="selected:true,iconCls:'icon-yxgl'" style="padding: 10px">
-            <a href="javascript:openTab('营销机会管理','sale_chance/index','icon-yxjhgl')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-yxjhgl'" style="width: 150px">营销机会管理</a>
-            <a href="javascript:openTab('客户开发计划','sale_chance/index?state=1','icon-khkfjh')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-khkfjh'" style="width: 150px">客户开发计划</a>
+            <a href="javascript:openTab('营销机会管理','saleChance/index','icon-yxjhgl')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-yxjhgl'" style="width: 150px">营销机会管理</a>
+            <a href="javascript:openTab('客户开发计划','saleChance/index?state=1','icon-khkfjh')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-khkfjh'" style="width: 150px">客户开发计划</a>
         </div>
         <div title="客户管理"  data-options="iconCls:'icon-khgl'" style="padding:10px;">
             <a href="javascript:openTab('客户信息管理','customer/index','icon-khxxgl')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-khxxgl'" style="width: 150px;">客户信息管理</a>
@@ -61,11 +61,11 @@
 <div region="south"  style="height:55px;background-color: #E0ECFF" align="center">
     版本所有 上海尚学堂 <a href="http://www.shsxt.com" target="_blank">www.shsxt.com</a>(2016-2026)<br/>
     上海尚学堂地址：上海市松江区荣乐东路2369弄45号绿地伯顿大厦2层 咨询电话：021-67690939<br/>
-	 上海尚学堂智能科技有限公司 的icp备案号 （沪ICP备16053543号）
+    上海尚学堂智能科技有限公司 的icp备案号 （沪ICP备16053543号）
 </div>
 
-<div id="dlg" class="easyui-dialog" style="width:400px;height:250px;padding: 10px 20px" title="修改密码"
-     closed="true" buttons="#dlg-buttons">
+<div id="dlg" class="easyui-dialog" style="width:400px;height:250px;padding: 10px 20px"
+     closed="true" buttons="#dlg-buttons" title="修改密码">
 
     <form id="fm" method="post">
         <table cellspacing="8px">
@@ -93,6 +93,6 @@
     <a href="javascript:modifyPassword()" class="easyui-linkbutton" iconCls="icon-ok">保存</a>
     <a href="javascript:closePasswordModifyDialog()" class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
 </div>
-<script src="${ctx}/js/main.js"></script>
+
 </body>
 </html>

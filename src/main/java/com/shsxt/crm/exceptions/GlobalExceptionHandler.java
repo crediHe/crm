@@ -15,7 +15,7 @@ import java.io.PrintWriter;
 import java.lang.reflect.Method;
 
 /**
- * Created by Administrator on 2018/12/20.
+ * Created by xlf on 2018/9/18.
  */
 @Component
 public class GlobalExceptionHandler implements HandlerExceptionResolver {
@@ -23,28 +23,43 @@ public class GlobalExceptionHandler implements HandlerExceptionResolver {
     public ModelAndView resolveException(HttpServletRequest request,
                                          HttpServletResponse response,
                                          Object handler, Exception ex) {
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("error");
-        mv.addObject("ctx",request.getContextPath());
-        mv.addObject("errorMsg",ex.getMessage());
 
+        ModelAndView mv = createDefModelAndView(request);
+        mv.addObject("errorMsg", "系统繁忙");
+
+        /***
+         * 区分: 页面请求 还是 json请求
+         * 依据: 是否含有@ResponseBody注解
+         *   (1) 有,代表时json接口
+         *   (2) 没有, 页面跳转接口
+         * */
         if(handler instanceof HandlerMethod){
             HandlerMethod handlerMethod = (HandlerMethod) handler;
             Method method = handlerMethod.getMethod();
             ResponseBody responseBody = method.getAnnotation(ResponseBody.class);
             if(null==responseBody){
-                //没有注解，页面请求
+                // 没有注解, 页面请求
                 if(ex instanceof ParamsException){
                     ParamsException e = (ParamsException) ex;
                     mv.addObject("errorMsg",e.getMsg());
                 }
+                if(ex instanceof LoginException){
+                    LoginException e = (LoginException) ex;
+                    mv.addObject("errorMsg",e.getMsg());
+                }
                 return mv;
             }else{
-                //有注解,json请求
+                // 有注解, json请求
                 ResultInfo resultInfo = new ResultInfo();
 
-                if(ex instanceof ParamsException){
+                if (ex instanceof ParamsException){
                     ParamsException e = (ParamsException) ex;
+                    resultInfo.setCode(e.getCode());
+                    resultInfo.setMsg(e.getMsg());
+                }
+
+                if (ex instanceof LoginException){
+                    LoginException e = (LoginException) ex;
                     resultInfo.setCode(e.getCode());
                     resultInfo.setMsg(e.getMsg());
                 }
@@ -61,17 +76,21 @@ public class GlobalExceptionHandler implements HandlerExceptionResolver {
                     pw.close();
                 } catch (IOException e) {
                     e.printStackTrace();
-                } finally {
-                    if(null!=pw){
+                }finally {
+                    if (null!=pw){
                         pw.close();
                     }
                 }
                 return null;
-
             }
         }
-
         return mv;
+    }
 
+    private ModelAndView createDefModelAndView(HttpServletRequest request) {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("error");
+        mv.addObject("ctx", request.getContextPath());
+        return mv;
     }
 }
