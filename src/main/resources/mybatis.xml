@@ -7,6 +7,7 @@
     <typeAliases>
         <!--包扫描实体类-->
         <package name="com.shsxt.crm.po"/>
+        <package name="com.shsxt.crm.query"/>
     </typeAliases>
 
     <plugins>
