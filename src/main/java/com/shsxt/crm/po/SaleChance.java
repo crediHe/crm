@@ -25,6 +25,7 @@ public class SaleChance {
 
     private String assignMan;
 
+    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss",timezone = "GTM+8")
     private Date assignTime;
 
     private Integer state;
@@ -36,6 +37,7 @@ public class SaleChance {
     @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss",timezone = "GTM+8")
     private Date createDate;
 
+    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss",timezone = "GTM+8")
     private Date updateDate;
 
     public Integer getId() {

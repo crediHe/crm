@@ -201,7 +201,7 @@
       <if test="null!=devResult">
         and dev_result=#{devResult}
       </if>
-      <if test="null!=createDate">
+      <if test="null!=createDate and ''!=createDate">
         and create_date &lt;=#{createDate}
       </if>
     </where>

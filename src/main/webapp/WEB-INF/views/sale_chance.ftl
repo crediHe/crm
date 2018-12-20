@@ -22,8 +22,8 @@
         <th field="createDate" width="100" align="center">创建时间</th>
         <th field="trueName" width="200" align="center">指派人</th>
         <th field="assignTime" width="200" align="center">指派时间</th>
-        <th field="state" width="100" align="center" formatter="">分配状态</th>
-        <th field="devResult" width="200" align="center" formatter="">客户开发状态</th>
+        <th field="state" width="100" align="center" formatter="formatState">分配状态</th>
+        <th field="devResult" width="200" align="center" formatter="formatDev">客户开发状态</th>
     </tr>
     </thead>
 </table>
