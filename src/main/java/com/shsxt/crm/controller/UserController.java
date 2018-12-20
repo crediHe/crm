@@ -1,5 +1,6 @@
 package com.shsxt.crm.controller;
 
+import com.shsxt.crm.base.BaseController;
 import com.shsxt.crm.exceptions.ParamsException;
 import com.shsxt.crm.model.ResultInfo;
 import com.shsxt.crm.model.UserInfo;
@@ -17,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 @RequestMapping("user")
-public class UserController {
+public class UserController extends BaseController{
     @Autowired
     private UserService userService;
 
