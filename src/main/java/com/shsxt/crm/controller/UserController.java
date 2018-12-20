@@ -25,21 +25,8 @@ public class UserController extends BaseController{
     @RequestMapping("login")
     @ResponseBody
     public ResultInfo login(String userName, String userPwd){
-        ResultInfo resultInfo = new ResultInfo();
-        try {
-            UserInfo result = userService.login(userName, userPwd);
-            resultInfo.setMsg("登陆成功");
-            resultInfo.setResult(result);
-        } catch (ParamsException e) {
-            e.printStackTrace();
-            resultInfo.setCode(300);
-            resultInfo.setMsg(e.getMsg());
-        } catch (Exception e1) {
-            e1.printStackTrace();
-            resultInfo.setMsg(e1.getMessage());
-            resultInfo.setCode(300);
-        }
-        return resultInfo;
+      UserInfo userInfo = userService.login(userName,userPwd);
+      return success("登陆成功",userInfo);
     }
 
     @RequestMapping("updateUserPwd")
@@ -49,19 +36,8 @@ public class UserController extends BaseController{
         ResultInfo resultInfo = new ResultInfo();
         //通过用户登录cookie信息中获取id
         Integer id = LoginUserUtil.releaseUserIdFromCookie(request);
+        userService.updateUserPwd(oldPassword,newPassword,confirmPassword,id);
+        return success("密码更新成功");
 
-        try {
-            userService.updateUserPwd(oldPassword,newPassword,confirmPassword,id);
-            resultInfo.setMsg("密码更新成功");
-        } catch (ParamsException e) {
-            e.printStackTrace();
-            resultInfo.setCode(300);
-            resultInfo.setMsg(e.getMsg());
-        } catch (Exception e) {
-            e.printStackTrace();
-            resultInfo.setCode(300);
-            resultInfo.setMsg(e.getMessage());
-        }
-        return resultInfo;
     }
 }
