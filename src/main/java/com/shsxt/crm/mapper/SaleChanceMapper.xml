@@ -30,7 +30,7 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
 
-  <insert id="insert" parameterType="com.shsxt.crm.po.SaleChance" >
+  <insert id="save" parameterType="com.shsxt.crm.po.SaleChance" >
     insert into t_sale_chance
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

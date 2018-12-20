@@ -58,3 +58,33 @@ $(function () {
         }
     });
 });
+
+// 添加（打开营销机会管理的添加功能）
+function openAddSaleChacneDialog() {
+    $('#dlg').dialog("open");
+}
+
+// 点击（打开营销机会管理的添加表单的）保存
+function saveOrUpdateSaleChance() {
+    $('#fm').form('submit', {
+        url: ctx + '/saleChance/saveOrUpdateSaleChance',
+        onSubmit: function () {
+            return $(this).form('validate');
+        },
+        success: function (data) {
+            data = JSON.parse(data);
+            //console.log(data);
+            if(data.code==200){
+                $.messager.alert('来自Crm',data.msg,'info',function () {
+                    // 关闭弹窗
+                    $('#dlg').dialog("close");
+                    // 刷新数据
+                    $('#dg').datagrid('load');
+                });
+            }else{
+                $.messager.alert('来自Crm',data.msg,'error');
+            }
+        }
+    });
+
+}

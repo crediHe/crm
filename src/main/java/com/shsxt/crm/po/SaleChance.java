@@ -25,7 +25,7 @@ public class SaleChance {
 
     private String assignMan;
 
-    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss",timezone = "GTM+8")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "GMT+8")
     private Date assignTime;
 
     private Integer state;
@@ -33,11 +33,9 @@ public class SaleChance {
     private Integer devResult;
 
     private Integer isValid;
-
-    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss",timezone = "GTM+8")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "GMT+8")
     private Date createDate;
-
-    @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss",timezone = "GTM+8")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "GMT+8")
     private Date updateDate;
 
     public Integer getId() {
@@ -166,5 +164,27 @@ public class SaleChance {
 
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
+    }
+
+    @Override
+    public String toString() {
+        return "SaleChance{" +
+                "id=" + id +
+                ", chanceSource='" + chanceSource + '\'' +
+                ", customerName='" + customerName + '\'' +
+                ", cgjl=" + cgjl +
+                ", overview='" + overview + '\'' +
+                ", linkMan='" + linkMan + '\'' +
+                ", linkPhone='" + linkPhone + '\'' +
+                ", description='" + description + '\'' +
+                ", createMan='" + createMan + '\'' +
+                ", assignMan='" + assignMan + '\'' +
+                ", assignTime=" + assignTime +
+                ", state=" + state +
+                ", devResult=" + devResult +
+                ", isValid=" + isValid +
+                ", createDate=" + createDate +
+                ", updateDate=" + updateDate +
+                '}';
     }
 }
