@@ -11,6 +11,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Created by Administrator on 2018/12/18.
  */
@@ -72,5 +76,9 @@ public class UserService extends BaseService<User>{
         userInfo.setRealName(user.getTrueName());
         userInfo.setUserIdStr(UserIDBase64.encoderUserID(user.getId()));
         return userInfo;
+    }
+
+    public List<Map> queryCustomerMamagers(){
+        return userMapper.queryCustomerMamagers();
     }
 }

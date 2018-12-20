@@ -21,4 +21,18 @@
     <update id="updateUserPwd">
         UPDATE t_user SET user_pwd=#{userPwd} WHERE id=#{id}
     </update>
+    <!--查询所有的客户经理-->
+    <!-- 查询所有的客户经理 (营销机会管理添加操作里的分配人) -->
+    <select id="queryCustomerMamagers" resultType="map">
+        SELECT
+        u.user_name AS trueName,
+        u.id
+        FROM
+        t_user AS u
+        LEFT JOIN t_user_role AS ur ON ur.user_id = u.id
+        LEFT JOIN t_role AS r ON r.id = ur.role_id
+        WHERE
+        u.is_valid = 1 AND
+        r.role_name = '客户经理'
+    </select>
 </mapper>

@@ -82,12 +82,10 @@
             <tr>
                 <td>分配人:</td>
                 <td>
-                    <input type="text" id="assignMan" name="assignMan"/>
-                   <#--
+                <#--<input type="text" id="assignMan" name="assignMan"/>-->
                     <input class="easyui-combobox" id="assignMan" name="assignMan"
                            valueField="id" textField="trueName"
-                           url="${ctx}/user/queryCustomerManagers" panelHeight="auto"/>
-                    -->
+                           url="<#--${ctx}-->/crm/user/queryCustomerMamagers" panelHeight="auto"/>
                 </td>
             </tr>
         </table>

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Administrator on 2018/12/18.
@@ -39,5 +41,11 @@ public class UserController extends BaseController{
         userService.updateUserPwd(oldPassword,newPassword,confirmPassword,id);
         return success("密码更新成功");
 
+    }
+
+    @RequestMapping("queryCustomerMamagers")
+    @ResponseBody
+    public List<Map> queryCustomerMamagers(){
+        return userService.queryCustomerMamagers();
     }
 }
