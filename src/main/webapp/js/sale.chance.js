@@ -90,3 +90,29 @@ function saveOrUpdateSaleChance() {
     });
 
 }
+
+//更新
+function openModifySaleChanceDialog() {
+    /***
+     * 1. 判断有没有勾选
+     * 2. 判断有没有多选
+     * 3. 回显数据到表格
+     * */
+    var rows = $('#dg').datagrid('getSelections');//获取勾选行
+    //console.log(rows);
+    if(rows.lenght==0){
+        $.messager.alert('来自Crm','请选择1条数据进行更新');
+        return;
+    }
+    if(rows.length==0){
+        $.messager.alert('来自Crm','请选择1条数据进行更新');
+        return;
+    }
+    if(rows.length>1){
+        $.messager.alert('来自Crm','只能选择1条数据进行更新');
+        return;
+    }
+    //console.log(rows[0]);
+    $('#fm').form('load',rows[0]);//回显数据
+    $('#dlg').dialog("open");//显示弹窗
+}
