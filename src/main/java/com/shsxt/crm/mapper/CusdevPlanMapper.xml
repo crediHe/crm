@@ -110,4 +110,12 @@
     from t_cus_dev_plan
     where is_valid=1 and sale_chance_id=#{sid}
   </select>
+  <!--批量删除-->
+  <update id="deleteBatch">
+    UPDATE t_cus_dev_plan SET is_valid = 0 WHERE id IN (
+        <foreach collection="array" item="item" separator=",">
+            #{item}
+        </foreach>
+    )
+  </update>
 </mapper>

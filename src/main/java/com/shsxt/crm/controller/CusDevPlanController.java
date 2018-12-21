@@ -55,4 +55,12 @@ public class CusDevPlanController extends BaseController {
         cusdevPlanService.saveOrUpdate(cusdevPlan, sid);
         return success("操作成功");
     }
+
+    @RequestMapping("deleteBatchCusDevPlan")
+    @ResponseBody
+    public ResultInfo deleteBatchCusDevPlan(Integer[] ids){
+        cusdevPlanService.deleteBatch(ids);
+        return success("操作成功");
+    }
+
 }

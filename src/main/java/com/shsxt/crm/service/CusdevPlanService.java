@@ -52,4 +52,5 @@ public class CusdevPlanService extends BaseService<CusdevPlan> {
         AssertUtil.isTrue(StringUtils.isBlank(exeAffect),"执行效果为空");
     }
 
+
 }
