@@ -1,6 +1,8 @@
 package com.shsxt.crm.controller;
 
 import com.shsxt.crm.base.BaseController;
+import com.shsxt.crm.model.ResultInfo;
+import com.shsxt.crm.po.CusdevPlan;
 import com.shsxt.crm.po.SaleChance;
 import com.shsxt.crm.query.CusdevPlanQuery;
 import com.shsxt.crm.query.SaleChanceQuery;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.sql.ResultSet;
 import java.util.Map;
 
 /**
@@ -44,5 +47,12 @@ public class CusDevPlanController extends BaseController {
         query.setPageNum(page);
         query.setPageSize(rows);
         return cusdevPlanService.queryForPage(query);
+    }
+
+    @RequestMapping("saveOrUpdateCusDevPlan")
+    @ResponseBody
+    public ResultInfo saveOrUpdateCusDevPlan(CusdevPlan cusdevPlan, Integer sid){
+        cusdevPlanService.saveOrUpdate(cusdevPlan, sid);
+        return success("操作成功");
     }
 }
