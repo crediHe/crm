@@ -85,7 +85,7 @@
                 <#--<input type="text" id="assignMan" name="assignMan"/>-->
                     <input class="easyui-combobox" id="assignMan" name="assignMan"
                            valueField="id" textField="trueName"
-                           url="<#--${ctx}-->/crm/user/queryCustomerMamagers" panelHeight="auto"/>
+                           url="${ctx}/user/queryCustomerMamagers" panelHeight="auto"/>
                 </td>
             </tr>
         </table>

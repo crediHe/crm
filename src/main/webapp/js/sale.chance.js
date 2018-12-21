@@ -114,5 +114,5 @@ function openModifySaleChanceDialog() {
     }
     //console.log(rows[0]);
     $('#fm').form('load',rows[0]);//回显数据
-    $('#dlg').dialog("open");//显示弹窗
+    $('#dlg').dialog("open");
 }
