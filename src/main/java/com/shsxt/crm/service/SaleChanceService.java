@@ -39,6 +39,7 @@ public class SaleChanceService extends BaseService<SaleChance> {
                 saleChance.getLinkMan(), saleChance.getLinkPhone());
 
         Integer id = saleChance.getId();
+        saleChance.setUpdateDate(new Date());//更新时间
         if(null==id){
             //添加
             User user = userMapper.queryById(userId);
@@ -47,7 +48,6 @@ public class SaleChanceService extends BaseService<SaleChance> {
             saleChance.setDevResult(0);//未开发
             saleChance.setIsValid(1);//账户有效
             saleChance.setCreateDate(new Date());//创建时间
-            saleChance.setUpdateDate(new Date());//更新时间
 
             /***
              * 判断有没有选分配人
@@ -64,6 +64,8 @@ public class SaleChanceService extends BaseService<SaleChance> {
             AssertUtil.isTrue(saleChanceMapper.save(saleChance)<1,"营销机会添加失败");
         }else{
             //更新
+            AssertUtil.isTrue(null==saleChanceMapper.queryById(id),"营销机会不存在");
+            AssertUtil.isTrue(saleChanceMapper.update(saleChance)<1,"营销机会更新失败");
         }
     }
 

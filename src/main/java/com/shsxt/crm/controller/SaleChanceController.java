@@ -44,8 +44,13 @@ public class SaleChanceController extends BaseController{
     @ResponseBody
     public ResultInfo saveOrUpdateSaleChance(SaleChance saleChance, HttpServletRequest request){
         Integer userId = LoginUserUtil.releaseUserIdFromCookie(request);
-        System.out.println(userId+"......................");//1
         saleChanceService.saveOrUpdateSaleChance(saleChance,userId);
-        return success("营销机会添加成功");
+        return success("操作成功");
+    }
+    @RequestMapping("deleteSaleChanceBatch")
+    @ResponseBody
+    public ResultInfo deleteSaleChanceBatch(Integer[] ids){
+        saleChanceService.deleteBatch(ids);
+        return success("删除成功");
     }
 }

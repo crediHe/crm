@@ -57,6 +57,13 @@ $(function () {
             }
         }
     });
+
+    $('#dlg').dialog({
+        "onClose":function () {
+            // 清空表单数据
+            $('#fm').form('clear');
+        }
+    })
 });
 
 // 添加（打开营销机会管理的添加功能）
@@ -116,3 +123,38 @@ function openModifySaleChanceDialog() {
     $('#fm').form('load',rows[0]);//回显数据
     $('#dlg').dialog("open");
 }
+
+//删除
+function deleteSaleChance() {
+    var rows = $('#dg').datagrid('getSelections');//获取勾选行
+    if(rows.length==0){
+        $.messager.alert('来自Crm','请至少选择1条数据进行删除');
+        return;
+    }
+    $.messager.confirm('来自Crm','确定要删除'+rows.length+'条数据?',function (r) {
+        if(r){
+            // 准备数据: ids=1&ids=2&ids=3
+            //console.log(rows);
+            var ids = '';
+            for(var i=0; i<rows.length; i++){
+                ids += 'ids='+rows[i].id+'&';
+            }
+            //console.log(ids);
+            $.ajax({
+                url: ctx +'/saleChance/deleteSaleChanceBatch',
+                data: ids,
+                success:function (data) {
+                    if(data.code==200){
+                        $.messager.alert('来自Crm',data.msg,'info',function () {
+                            // 刷新数据
+                            $('#dg').datagrid('load');
+                        });
+                    }else{
+                        $.messager.alert('来自Crm',data.msg,'error');
+                    }
+                }
+            });
+        }
+    });
+}
+

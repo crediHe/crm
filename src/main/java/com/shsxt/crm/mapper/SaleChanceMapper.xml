@@ -184,6 +184,14 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <!--假删除-->
+  <update id="deleteBatch">
+      UPDATE t_sale_chance SET is_valid=0 WHERE id IN (
+          <foreach collection="array" item="item" separator=",">
+                #{item}
+          </foreach>
+      )
+  </update>
 
   <!-- 多条件查询 -->
   <select id="queryByParams" parameterType="saleChanceQuery" resultMap="BaseResultMap">
