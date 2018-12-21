@@ -96,7 +96,7 @@ function deleteData(dataGridId,deleteUrl,searchByParams) {
                 success:function (data) {
                     if(data.code==200){
                         // 刷新datagrid
-                       searchByParams();
+                        searchByParams();
                     }else{
                         $.messager.alert("来自crm",data.msg,"error");
                     }

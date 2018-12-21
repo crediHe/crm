@@ -8,6 +8,7 @@ import com.shsxt.crm.service.SaleChanceService;
 import com.shsxt.crm.utils.LoginUserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,9 +26,15 @@ public class SaleChanceController extends BaseController{
     @Autowired
     private SaleChanceService saleChanceService;
 
-    @RequestMapping("index")
-    public String index(){
-        return "sale_chance";
+    @RequestMapping("index/{state}")
+    public String index(@PathVariable Integer state){
+        if(state==0){
+            return "sale_chance";
+        }else if(state==1){
+            return "cus_dev_plan";
+        }else{
+            return "error";
+        }
     }
 
     @RequestMapping("querySaleChancesByParams")
