@@ -35,4 +35,40 @@
         u.is_valid = 1 AND
         r.role_name = '客户经理'
     </select>
+
+    <resultMap id="BaseResultMap" type="userDto" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="user_name" property="userName" jdbcType="VARCHAR" />
+        <result column="user_pwd" property="userPwd" jdbcType="VARCHAR" />
+        <result column="true_name" property="trueName" jdbcType="VARCHAR" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
+        <result column="phone" property="phone" jdbcType="VARCHAR" />
+        <result column="is_valid" property="isValid" jdbcType="INTEGER" />
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+        <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+    </resultMap>
+    <!-- 用户参数查询 -->
+    <select id="queryByParams" parameterType="userQuery" resultMap="BaseResultMap">
+        SELECT
+        t_user.*,
+        GROUP_CONCAT(t_role.role_name) as role_name
+        FROM
+        t_user
+        LEFT JOIN t_user_role ON t_user_role.user_id = t_user.id
+        LEFT JOIN t_role ON t_role.id = t_user_role.role_id
+        <where>
+            t_user.is_valid = 1
+            <if test="null!=userName and ''!=userName">
+                and user_name like concat('%',#{userName},'%')
+            </if>
+            <if test="null!=email and ''!=email">
+                and email like concat('%',#{email},'%')
+            </if>
+            <if test="null!=phone and ''!=phone">
+                and phone like concat('%',#{phone},'%')
+            </if>
+            GROUP BY t_user.id
+        </where>
+    </select>
 </mapper>

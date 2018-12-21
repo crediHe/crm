@@ -8,6 +8,7 @@
         <!--包扫描实体类-->
         <package name="com.shsxt.crm.po"/>
         <package name="com.shsxt.crm.query"/>
+        <package name="com.shsxt.crm.dto"/>
     </typeAliases>
 
     <plugins>

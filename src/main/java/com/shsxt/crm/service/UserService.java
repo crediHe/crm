@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +24,48 @@ public class UserService extends BaseService<User>{
     @Autowired
     private UserMapper userMapper;
 
+    /**
+     * 添加和更新用户
+     * @param user
+     */
+    public void saveOrUpdate(User user){
+        /***
+         * 1. 校验参数
+         * 2. 判断添加或者更新
+         * 3. 补全参数
+         * 4. 执行操作
+         * */
+        checkParams(user.getUserName(),user.getTrueName(),user.getEmail(),user.getPhone());
+        Integer id = user.getId();
+
+        user.setUpdateDate(new Date());
+        if(null==id){
+            //添加
+            /***
+             * 1. 用户名唯一,不重复
+             * 2. 密码需要进行初始化
+             *      初始密码: 123456, 注意存存加密之后密码
+             * */
+            AssertUtil.isTrue(null!=userMapper.queryUserByName(user.getUserName()),"用户名已被注册");
+
+            user.setUserPwd(Md5Util.encode("123456"));
+            user.setIsValid(1);
+            user.setCreateDate(new Date());
+            AssertUtil.isTrue(userMapper.save(user)<1, "用户添加失败");
+
+        }else{
+            //更新
+        }
+
+    }
+
+    private void checkParams(String userName, String trueName, String email, String phone) {
+
+        AssertUtil.isTrue(StringUtils.isBlank(userName),"用户名为空");
+        AssertUtil.isTrue(StringUtils.isBlank(trueName),"真实姓名为空");
+        AssertUtil.isTrue(StringUtils.isBlank(email),"邮箱为空");
+        AssertUtil.isTrue(StringUtils.isBlank(phone),"电话为空");
+    }
     /**
      * 修改密码
      * @param oldPassword

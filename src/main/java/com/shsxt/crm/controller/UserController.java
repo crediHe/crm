@@ -4,11 +4,14 @@ import com.shsxt.crm.base.BaseController;
 import com.shsxt.crm.exceptions.ParamsException;
 import com.shsxt.crm.model.ResultInfo;
 import com.shsxt.crm.model.UserInfo;
+import com.shsxt.crm.po.User;
+import com.shsxt.crm.query.UserQuery;
 import com.shsxt.crm.service.UserService;
 import com.shsxt.crm.utils.LoginUserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -47,5 +50,21 @@ public class UserController extends BaseController{
     @ResponseBody
     public List<Map> queryCustomerMamagers(){
         return userService.queryCustomerMamagers();
+    }
+
+    @RequestMapping("queryUsersByParams")
+    @ResponseBody
+    public Map<String, Object> queryUsersByParams(UserQuery query,
+                                                  @RequestParam(defaultValue = "1") Integer page,
+                                                  @RequestParam(defaultValue = "10") Integer rows){
+        query.setPageNum(page);
+        query.setPageSize(rows);
+        return userService.queryForPage(query);
+    }
+    @RequestMapping("saveOrUpdateUser")
+    @ResponseBody
+    public ResultInfo saveOrUpdateUser(User user){
+        userService.saveOrUpdate(user);
+        return success("操作成功");
     }
 }
