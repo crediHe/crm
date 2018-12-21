@@ -9,6 +9,7 @@ import java.util.Map;
  */
 public interface BaseDao<T> {
     /**
+     *
      * 添加记录
      * @param entity
      * @return
