@@ -1,6 +1,7 @@
 package com.shsxt.crm.service;
 
 import com.shsxt.crm.base.BaseService;
+import com.shsxt.crm.dao.CusdevPlanMapper;
 import com.shsxt.crm.dao.SaleChanceMapper;
 import com.shsxt.crm.dao.UserMapper;
 import com.shsxt.crm.po.SaleChance;
@@ -75,4 +76,10 @@ public class SaleChanceService extends BaseService<SaleChance> {
         AssertUtil.isTrue(StringUtils.isBlank(linkPhone),"联系电话为空");
     }
 
+    public void updateDevResult(Integer devResult, Integer sid) {
+        SaleChance saleChance = new SaleChance();
+        saleChance.setId(sid);
+        saleChance.setDevResult(devResult);
+        AssertUtil.isTrue(saleChanceMapper.update(saleChance)<1,"修改客户开发状态失败");
+    }
 }

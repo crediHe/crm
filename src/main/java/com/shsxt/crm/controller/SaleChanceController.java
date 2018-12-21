@@ -60,4 +60,11 @@ public class SaleChanceController extends BaseController{
         saleChanceService.deleteBatch(ids);
         return success("删除成功");
     }
+
+    @RequestMapping("updateDevResult")
+    @ResponseBody
+    public ResultInfo updateDevResult(Integer devResult,Integer sid){
+        saleChanceService.updateDevResult(devResult,sid);
+        return success("操作成功");
+    }
 }
