@@ -17,9 +17,11 @@ public class CusdevPlan {
     private Date planDate;
 
     private String exeAffect;
-
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date createDate;
-
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date updateDate;
 
     private Integer isValid;
