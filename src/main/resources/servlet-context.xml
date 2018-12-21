@@ -61,7 +61,7 @@
     <!-- 配置拦截器 -->
     <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/*"/><!--所有请求 -->
+            <mvc:mapping path="/**"/><!--所有请求 -->
             <mvc:exclude-mapping path="/index"/> <!-- 访问登陆页面 -->
             <mvc:exclude-mapping path="/user/login"/> <!-- 登陆操作 -->
             <bean class="com.shsxt.crm.interceptors.LoginInterceptor"></bean>

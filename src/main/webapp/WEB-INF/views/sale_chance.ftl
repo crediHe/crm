@@ -1,7 +1,7 @@
 <html>
 <head>
 <#include "common.ftl" >
-    <script type="text/javascript" src="${ctx}/js/sale.chance.js"></script>
+    <script type="text/javascript" src="${ctx}/js/sale.chance2.js"></script>
 </head>
 <body style="margin: 1px">
 <table id="dg" class="easyui-datagrid"
