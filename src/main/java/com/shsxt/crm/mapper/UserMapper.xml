@@ -3,26 +3,26 @@
 <mapper namespace="com.shsxt.crm.dao.UserMapper" >
 
     <sql id="base">
-        id,user_name as userName,user_pwd as userPwd,true_name as trueName,
+      id,user_name as userName,user_pwd as userPwd,true_name as trueName,
       email,phone,is_valid as isValid,create_date as createDate,update_date as updateDate
     </sql>
-
-    <!--通过用户名查询用户-->
-    <select id="queryUserByName" resultType="user" parameterType="string">
+    <!-- 通过用户名查询用户 -->
+    <select id="queryUserByName" parameterType="string" resultType="user">
         SELECT <include refid="base"/>
-        FROM t_user WHERE is_valid=1 AND user_name=#{userName}
+        FROM t_user WHERE is_valid = 1 AND user_name=#{userName}
     </select>
-    <!--通过id查询用户-->
+
     <select id="queryById" parameterType="int" resultType="user">
         SELECT <include refid="base"/>
-        FROM t_user WHERE is_valid=1 and id=#{id}
+        FROM t_user WHERE is_valid = 1 AND id=#{id}
     </select>
-    <!--修改密码-->
+
+    <!-- 更新用户密码 -->
     <update id="updateUserPwd">
-        UPDATE t_user SET user_pwd=#{userPwd} WHERE id=#{id}
+        UPDATE t_user SET user_pwd=#{userPwd} where id=#{id}
     </update>
-    <!--查询所有的客户经理-->
-    <!-- 查询所有的客户经理 (营销机会管理添加操作里的分配人) -->
+
+    <!-- 查询所有的客户经理 -->
     <select id="queryCustomerMamagers" resultType="map">
         SELECT
         u.user_name AS trueName,
@@ -71,4 +71,5 @@
             GROUP BY t_user.id
         </where>
     </select>
+
 </mapper>
