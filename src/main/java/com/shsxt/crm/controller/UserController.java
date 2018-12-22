@@ -69,8 +69,8 @@ public class UserController extends BaseController{
 
     @RequestMapping("saveOrUpdateUser")
     @ResponseBody
-    public ResultInfo saveOrUpdateUser(User user){
-        userService.saveOrUpdate(user);
+    public ResultInfo saveOrUpdateUser(User user,Integer[] roleIds){
+        userService.saveOrUpdate(user,roleIds);
         return success("操作成功");
     }
 }

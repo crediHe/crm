@@ -2,16 +2,20 @@ package com.shsxt.crm.service;
 
 import com.shsxt.crm.base.BaseService;
 import com.shsxt.crm.dao.UserMapper;
+import com.shsxt.crm.dao.UserRoleMapper;
 import com.shsxt.crm.model.UserInfo;
 import com.shsxt.crm.po.User;
+import com.shsxt.crm.po.UserRole;
 import com.shsxt.crm.utils.AssertUtil;
 import com.shsxt.crm.utils.Md5Util;
 import com.shsxt.crm.utils.UserIDBase64;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -23,12 +27,15 @@ import java.util.Map;
 public class UserService extends BaseService<User>{
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private UserRoleMapper userRoleMapper;
 
     /**
      * 添加和更新用户
      * @param user
+     * @param roleIds
      */
-    public void saveOrUpdate(User user){
+    public void saveOrUpdate(User user, Integer[] roleIds){
         /***
          * 1. 校验参数
          * 2. 判断添加或者更新
@@ -52,6 +59,30 @@ public class UserService extends BaseService<User>{
             user.setIsValid(1);
             user.setCreateDate(new Date());
             AssertUtil.isTrue(userMapper.save(user)<1, "用户添加失败");
+
+            /***
+             * 角色添加
+             * 1. 拿到roleId 的数组
+             * 2. 查询出新用户的ID
+             * 3. 变量数组生成所有的UserRole对象
+             * 4. 批量一次性添加到数据库
+             * */
+            if(null!=roleIds && roleIds.length>0){
+                List<UserRole> list = new ArrayList<>();
+
+                Integer userId = userMapper.queryUserByName(user.getUserName()).getId();
+
+                for (Integer roleId:roleIds){
+                    UserRole userRole = new UserRole();
+                    userRole.setRoleId(roleId);
+                    userRole.setUserId(userId);
+                    userRole.setCreateDate(new Date());
+                    userRole.setUpdateDate(new Date());
+                    list.add(userRole);
+                }
+
+                AssertUtil.isTrue(userRoleMapper.saveBatch(list)<list.size(),"用户角色添加失败");
+            }
 
         }else{
             //更新
