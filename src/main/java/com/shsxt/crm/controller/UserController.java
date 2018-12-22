@@ -66,6 +66,7 @@ public class UserController extends BaseController{
         query.setPageSize(rows);
         return userService.queryForPage(query);
     }
+
     @RequestMapping("saveOrUpdateUser")
     @ResponseBody
     public ResultInfo saveOrUpdateUser(User user){

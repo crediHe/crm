@@ -2,9 +2,72 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.shsxt.crm.dao.UserMapper" >
 
+
+    <insert id="save" parameterType="user" >
+        insert into t_user
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="userName != null" >
+                user_name,
+            </if>
+            <if test="userPwd != null" >
+                user_pwd,
+            </if>
+            <if test="trueName != null" >
+                true_name,
+            </if>
+            <if test="email != null" >
+                email,
+            </if>
+            <if test="phone != null" >
+                phone,
+            </if>
+            <if test="isValid != null" >
+                is_valid,
+            </if>
+            <if test="createDate != null" >
+                create_date,
+            </if>
+            <if test="updateDate != null" >
+                update_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="userName != null" >
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="userPwd != null" >
+                #{userPwd,jdbcType=VARCHAR},
+            </if>
+            <if test="trueName != null" >
+                #{trueName,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null" >
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null" >
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="isValid != null" >
+                #{isValid,jdbcType=INTEGER},
+            </if>
+            <if test="createDate != null" >
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null" >
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
     <sql id="base">
-      id,user_name as userName,user_pwd as userPwd,true_name as trueName,
-      email,phone,is_valid as isValid,create_date as createDate,update_date as updateDate
+        id,user_name as userName,user_pwd as userPwd,true_name as trueName,
+        email,phone,is_valid as isValid,create_date as createDate,update_date as updateDate
     </sql>
     <!-- 通过用户名查询用户 -->
     <select id="queryUserByName" parameterType="string" resultType="user">

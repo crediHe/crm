@@ -10,3 +10,7 @@ function queryUsersByParams() {
 function openAddUserDailog() {
     openAddOrUpdateDlg('dlg','添加用户')
 }
+
+function saveOrUpdateUser() {
+    saveOrUpdateData('fm',ctx+'/user/saveOrUpdateUser','dlg',queryUsersByParams);
+}
