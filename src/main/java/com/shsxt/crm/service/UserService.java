@@ -1,24 +1,26 @@
 package com.shsxt.crm.service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.shsxt.crm.base.BaseService;
 import com.shsxt.crm.dao.UserMapper;
 import com.shsxt.crm.dao.UserRoleMapper;
+import com.shsxt.crm.dto.UserDto;
 import com.shsxt.crm.model.UserInfo;
 import com.shsxt.crm.po.User;
 import com.shsxt.crm.po.UserRole;
+import com.shsxt.crm.query.UserQuery;
 import com.shsxt.crm.utils.AssertUtil;
 import com.shsxt.crm.utils.Md5Util;
 import com.shsxt.crm.utils.UserIDBase64;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Administrator on 2018/12/18.
@@ -155,4 +157,32 @@ public class UserService extends BaseService<User>{
     public List<Map> queryCustomerMamagers(){
         return userMapper.queryCustomerMamagers();
     }
+
+    public Map<String,Object> queryForPage(UserQuery baseQuery) throws DataAccessException {
+        PageHelper.startPage(baseQuery.getPageNum(),baseQuery.getPageSize());
+        List<UserDto> entities=userMapper.queryByParams(baseQuery);
+        PageInfo<UserDto> pageInfo=new PageInfo<UserDto>(entities);
+        Map<String,Object> map=new HashMap<String,Object>();
+
+        /* 获取roleId 字符串 */
+        // 2,3,4,5,6  -> [2,3,4,5,6]
+        List<UserDto> userDtoList = pageInfo.getList();
+        for(UserDto userDto : userDtoList){
+            String roleIdsStr = userDto.getRoleIdsStr();// 2,3,4,5
+            if(!StringUtils.isBlank(roleIdsStr)){
+                String[] roleIdsArr = roleIdsStr.split(",");
+                List<Integer> list = new ArrayList<>();
+                for (int i=0; i<roleIdsArr.length; i++){
+                    list.add(Integer.valueOf(roleIdsArr[i]));
+                }
+                userDto.setRoleIds(list);
+            }
+        }
+        /* 把字符串变成 数字的集合 */
+
+        map.put("total",pageInfo.getTotal());
+        map.put("rows",pageInfo.getList());
+        return map;
+    }
+
 }

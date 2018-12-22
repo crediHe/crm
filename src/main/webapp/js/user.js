@@ -14,3 +14,16 @@ function openAddUserDailog() {
 function saveOrUpdateUser() {
     saveOrUpdateData('fm',ctx+'/user/saveOrUpdateUser','dlg',queryUsersByParams);
 }
+
+function openModifyUserDialog () {
+    openModifyDialog('dg','fm','dlg','更新用户')
+}
+
+$(function () {
+    $('#dlg').dialog({
+        "onClose":function () {
+            // 清空表单数据
+            $('#fm').form('clear');
+        }
+    })
+});

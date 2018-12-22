@@ -1,7 +1,9 @@
 package com.shsxt.crm.dao;
 
 import com.shsxt.crm.base.BaseDao;
+import com.shsxt.crm.dto.UserDto;
 import com.shsxt.crm.po.User;
+import com.shsxt.crm.query.UserQuery;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -20,4 +22,6 @@ public interface UserMapper extends BaseDao<User> {
     public Integer updateUserPwd(@Param("id") Integer id, @Param("userPwd") String userPwd);
     /*查询所有的客户经理*/
     public List<Map> queryCustomerMamagers();
+
+    public List<UserDto> queryByParams(UserQuery baseQuery);
 }

@@ -110,12 +110,14 @@
         <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
         <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
         <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+        <result column="role_ids" property="roleIdsStr" jdbcType="VARCHAR"/>
     </resultMap>
     <!-- 用户参数查询 -->
     <select id="queryByParams" parameterType="userQuery" resultMap="BaseResultMap">
         SELECT
         t_user.*,
-        GROUP_CONCAT(t_role.role_name) as role_name
+        GROUP_CONCAT(t_role.role_name) as role_name,
+        GROUP_CONCAT(DISTINCT t_role.id) as role_ids
         FROM
         t_user
         LEFT JOIN t_user_role ON t_user_role.user_id = t_user.id
