@@ -88,6 +88,48 @@ public class UserService extends BaseService<User>{
 
         }else{
             //更新
+            /***
+             * 校验id 用户名
+             * */
+            User user1 = userMapper.queryById(id);
+            //用户要修改用户名才执行用户名查询操作
+            if(!user1.getUserName().equals(user.getUserName())){
+                AssertUtil.isTrue(null!=userMapper.queryUserByName(user.getUserName()),"用户名已经被注册");
+            }
+
+            AssertUtil.isTrue(userMapper.update(user)<1,"用户更新失败");
+
+            /***
+             * 方案: 先全部删除原有所有角色, 在批量添加新角色
+             * */
+            // 1. 删除之前先查询用户是否有角色, 如果有删除,如果没有不删除
+            Integer num1 = userRoleMapper.queryRolesByUserId(id);//106
+            if(null!=num1 && num1>0){
+                AssertUtil.isTrue(userRoleMapper.deleteRolesByUserId(id)<num1,"用户角色删除失败");
+            }
+        }
+        /***
+         * 角色添加
+         * 1. 拿到roleId 的数组
+         * 2. 查询出新用户的ID
+         * 3. 变量数组生成所有的UserRole对象
+         * 4. 批量一次性添加到数据库
+         * */
+        if(null!=roleIds && roleIds.length>0){
+            ArrayList<UserRole> list = new ArrayList<>();
+
+            Integer userId = userMapper.queryUserByName(user.getUserName()).getId();
+            //角色id
+            for(Integer roleId:roleIds){
+                UserRole userRole = new UserRole();
+                userRole.setRoleId(roleId);
+                userRole.setUserId(userId);
+                userRole.setCreateDate(new Date());
+                userRole.setUpdateDate(new Date());
+                list.add(userRole);
+            }
+
+            AssertUtil.isTrue(userRoleMapper.saveBatch(list)<list.size(),"用户角色添加失败");
         }
 
     }
