@@ -19,6 +19,10 @@ function openModifyUserDialog () {
     openModifyDialog('dg','fm','dlg','更新用户')
 }
 
+function deleteUser() {
+    deleteData('dg',ctx +'/user/deleteUser',queryUsersByParams);
+}
+
 $(function () {
     $('#dlg').dialog({
         "onClose":function () {

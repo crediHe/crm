@@ -33,6 +33,24 @@ public class UserService extends BaseService<User>{
     private UserRoleMapper userRoleMapper;
 
     /**
+     * 删除用户
+     * @param ids
+     */
+    public void deleteUser(Integer[] ids){
+        /***
+         * 1. 执行用户删除
+         * 2. 删除用户角色
+         * */
+        for(Integer userId : ids){
+            AssertUtil.isTrue(userMapper.delete(userId)<1,"用户删除失败");
+            // 删除之前先查询用户是否有角色, 如果有删除,如果没有不删除
+            Integer num1 = userRoleMapper.queryRolesByUserId(userId);
+            if(null!=num1&&num1>0){
+                AssertUtil.isTrue(userRoleMapper.deleteRolesByUserId(userId)<1,"用户角色删除失败");
+            }
+        }
+    }
+    /**
      * 添加和更新用户
      * @param user
      * @param roleIds

@@ -73,4 +73,11 @@ public class UserController extends BaseController{
         userService.saveOrUpdate(user,roleIds);
         return success("操作成功");
     }
+
+    @RequestMapping("deleteUser")
+    @ResponseBody
+    public ResultInfo deleteUser(Integer[] ids){
+        userService.deleteUser(ids);
+        return success("操作成功");
+    }
 }
