@@ -50,11 +50,12 @@
         <div title="基础数据管理"  data-options="iconCls:'icon-jcsjgl'" style="padding:10px">
             <a href="javascript:openTab('数据字典管理','datadic/index','icon-sjzdgl')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-sjzdgl'" style="width: 150px;">数据字典管理</a>
             <a href="javascript:openTab('产品信息查询','product/index','icon-cpxxgl')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-cpxxgl'" style="width: 150px;">产品信息查询</a>
-            <a href="javascript:openTab('用户信息管理','user/index','icon-user')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-user'" style="width: 150px;">用户信息管理</a>
+
         </div>
         <div title="系统管理"  data-options="iconCls:'icon-item'" style="padding:10px">
             <a href="javascript:openPasswordModifyDialog()" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-modifyPassword'" style="width: 150px;">修改密码</a>
             <a href="javascript:logout()" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-exit'" style="width: 150px;">安全退出</a>
+            <a href="javascript:openTab('用户信息管理','user/index','icon-user')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-user'" style="width: 150px;">用户信息管理</a>
         </div>
     </div>
 </div>

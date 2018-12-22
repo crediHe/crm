@@ -27,6 +27,11 @@ public class UserController extends BaseController{
     @Autowired
     private UserService userService;
 
+    @RequestMapping("index")
+    public String index(){
+        return "user";
+    }
+
     @RequestMapping("login")
     @ResponseBody
     public ResultInfo login(String userName, String userPwd){
