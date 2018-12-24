@@ -12,7 +12,7 @@
                 <img alt="logo" src="${ctx}/images/bglogo.png">
             </td>
             <td valign="bottom" align="right" width="50%">
-                <font size="3">&nbsp;&nbsp;<strong>欢迎：</strong>${(user.userName)!"sxt"}</font>【${(user.trueName)!"sxt" }】【${(user.roleName)!"系统管理员" }】
+                <font size="3">&nbsp;&nbsp;<strong>欢迎：</strong>${(user.userName)!"sxt"}</font>【${(user.trueName)!"sxt" }】<#--【${(user.roleName)!"系统管理员" }】-->
             </td>
         </tr>
     </table>
@@ -50,12 +50,12 @@
         <div title="基础数据管理"  data-options="iconCls:'icon-jcsjgl'" style="padding:10px">
             <a href="javascript:openTab('数据字典管理','datadic/index','icon-sjzdgl')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-sjzdgl'" style="width: 150px;">数据字典管理</a>
             <a href="javascript:openTab('产品信息查询','product/index','icon-cpxxgl')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-cpxxgl'" style="width: 150px;">产品信息查询</a>
-
         </div>
         <div title="系统管理"  data-options="iconCls:'icon-item'" style="padding:10px">
             <a href="javascript:openPasswordModifyDialog()" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-modifyPassword'" style="width: 150px;">修改密码</a>
             <a href="javascript:logout()" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-exit'" style="width: 150px;">安全退出</a>
             <a href="javascript:openTab('用户信息管理','user/index','icon-user')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-user'" style="width: 150px;">用户信息管理</a>
+            <a href="javascript:openTab('角色管理','role/index','icon-user')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-user'" style="width: 150px;">角色管理</a>
         </div>
     </div>
 </div>
@@ -65,8 +65,8 @@
     上海尚学堂智能科技有限公司 的icp备案号 （沪ICP备16053543号）
 </div>
 
-<div id="dlg" class="easyui-dialog" style="width:400px;height:250px;padding: 10px 20px"
-     closed="true" buttons="#dlg-buttons" title="修改密码">
+<div id="dlg" class="easyui-dialog" style="width:400px;height:250px;padding: 10px 20px" title="修改密码"
+     closed="true" buttons="#dlg-buttons">
 
     <form id="fm" method="post">
         <table cellspacing="8px">
@@ -94,6 +94,6 @@
     <a href="javascript:modifyPassword()" class="easyui-linkbutton" iconCls="icon-ok">保存</a>
     <a href="javascript:closePasswordModifyDialog()" class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
 </div>
-
+<script src="${ctx}/js/main.js"></script>
 </body>
 </html>

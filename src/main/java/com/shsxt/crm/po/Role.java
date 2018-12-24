@@ -1,5 +1,7 @@
 package com.shsxt.crm.po;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Role {
@@ -8,9 +10,9 @@ public class Role {
     private String roleName;
 
     private String roleRemark;
-
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "GMT+8")
     private Date createDate;
-
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "GMT+8")
     private Date updateDate;
 
     private Integer isValid;

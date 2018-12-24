@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Created by Administrator on 2018/12/20.
  */
-public class BaseController {
+public class BaseController{
 
     public ResultInfo success(Integer code,String msg,Object result){
         ResultInfo resultInfo = new ResultInfo();

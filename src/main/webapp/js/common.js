@@ -23,51 +23,51 @@ Date.prototype.format = function(fmt) { //author: meizz
 };
 
 function getCurrentDateTime(){
-	var date=new Date();
-	var year=date.getFullYear();
-	var month=date.getMonth()+1;
-	var day=date.getDate();
-	var hours=date.getHours();
-	var minutes=date.getMinutes();
-	var seconds=date.getSeconds();
-	return year+"-"+formatZero(month)+"-"+formatZero(day)+" "+formatZero(hours)+":"+formatZero(minutes)+":"+formatZero(seconds);
+    var date=new Date();
+    var year=date.getFullYear();
+    var month=date.getMonth()+1;
+    var day=date.getDate();
+    var hours=date.getHours();
+    var minutes=date.getMinutes();
+    var seconds=date.getSeconds();
+    return year+"-"+formatZero(month)+"-"+formatZero(day)+" "+formatZero(hours)+":"+formatZero(minutes)+":"+formatZero(seconds);
 }
 
 function getCurrentDate(){
-	var date = new Date();
-	var year = date.getFullYear();
-	var month = date.getMonth()+1;
-	var day = date.getDate();
-	return year + "-" + formatZero(month) + "-" + formatZero(day);
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = date.getMonth()+1;
+    var day = date.getDate();
+    return year + "-" + formatZero(month) + "-" + formatZero(day);
 }
 
 function formatZero(n){
-	if(n >= 0 && n <= 9){
-		return "0" + n;
-	}else{
-		return n;
-	}
+    if(n >= 0 && n <= 9){
+        return "0" + n;
+    }else{
+        return n;
+    }
 }
 
 function isNull (targetObj) {
-	if (targetObj == null || targetObj == 'null'
-		|| typeof targetObj == 'undefined' || targetObj == 'undefined') {
-		return true;
-	} else {
-		return false;
-	}
+    if (targetObj == null || targetObj == 'null'
+        || typeof targetObj == 'undefined' || targetObj == 'undefined') {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 function isEmpty(targetStr) {
-	if (isNull(targetStr) || targetStr.length < 1) {
-		return true;
-	} else {
-		return false;
-	}
+    if (isNull(targetStr) || targetStr.length < 1) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 String.prototype.trim = function(){
-	return this.replace(/(^\s*)|(\s*$)/g, "");
+    return this.replace(/(^\s*)|(\s*$)/g, "");
 };
 
 /**
@@ -76,32 +76,32 @@ String.prototype.trim = function(){
  * 扩展datagrid的editor的datetimebox类型
  */
 /*
-$.extend($.fn.datagrid.defaults.editors, {
-    datetimebox: { //datetimebox就是你要自定义editor的名称
-        init: function(container, options) {
-            var editor = $('<input />').appendTo(container);
-            editor.enableEdit = false;
-            editor.datetimebox(options);
-            return editor;
-        },
-        getValue: function(target) {
-            var new_str = $(target).datetimebox('getValue');
-            return new_str;
-        },
-        setValue: function(target, value) {
-        	var datetime;
-        	if (value == null) {
-        		datetime  = new Date();
-        	} else {
-        		datetime = new Date(value);
-        	}
-            $(target).datetimebox('setValue', datetime.format("yyyy-MM-dd hh:mm:ss"));
-        },
-        resize: function(target, width){
-            $(target).datetimebox('resize', width);
-        },
-        destroy: function(target){
-            $(target).datetimebox('destroy');
-        }
-    }
-});*/
+ $.extend($.fn.datagrid.defaults.editors, {
+ datetimebox: { //datetimebox就是你要自定义editor的名称
+ init: function(container, options) {
+ var editor = $('<input />').appendTo(container);
+ editor.enableEdit = false;
+ editor.datetimebox(options);
+ return editor;
+ },
+ getValue: function(target) {
+ var new_str = $(target).datetimebox('getValue');
+ return new_str;
+ },
+ setValue: function(target, value) {
+ var datetime;
+ if (value == null) {
+ datetime  = new Date();
+ } else {
+ datetime = new Date(value);
+ }
+ $(target).datetimebox('setValue', datetime.format("yyyy-MM-dd hh:mm:ss"));
+ },
+ resize: function(target, width){
+ $(target).datetimebox('resize', width);
+ },
+ destroy: function(target){
+ $(target).datetimebox('destroy');
+ }
+ }
+ });*/
