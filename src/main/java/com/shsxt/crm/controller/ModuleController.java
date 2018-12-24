@@ -31,8 +31,8 @@ public class ModuleController extends BaseController {
     @RequestMapping("queryModulesByParams")
     @ResponseBody
     public Map<String, Object> queryModulesByParams(ModuleQuery query,
-                                                  @RequestParam(defaultValue = "1") Integer page,
-                                                  @RequestParam(defaultValue = "10") Integer rows){
+                                                    @RequestParam(defaultValue = "1") Integer page,
+                                                    @RequestParam(defaultValue = "10") Integer rows){
         query.setPageNum(page);
         query.setPageSize(rows);
         return moduleService.queryForPage(query);
