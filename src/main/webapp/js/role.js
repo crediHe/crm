@@ -44,6 +44,8 @@ var treeObj;
 function loadModule(roleId) {
     // 设置隐藏域roleId
     $('#roleId').val(roleId);
+    // 清空 moduleIds
+    $('#moduleIds').val('');
 
     $.ajax({
         url: ctx + '/role/queryPermissionByRoleId?roleId='+roleId,
@@ -86,4 +88,28 @@ function zTreeOnCheck() {
         moduleIds +="moduleIds="+nodes[i].id+"&"
     }
     $('#moduleIds').val(moduleIds);
+}
+
+
+//授权
+function doGrant () {
+    $.ajax({
+        url: ctx + '/permission/doGrant?'+$('#moduleIds').val(),
+        type:'post',
+        data:{
+            roleId: $('#roleId').val()
+        },
+        success:function (data) {
+            if(data.code==200){
+                $.messager.alert('来自Crm',data.msg,'info',function () {
+                    // 关闭弹窗
+                    closeDlgData('permissionDlg');
+                    // 刷新数据
+                    $('#dg').datagrid('load');
+                });
+            }else{
+                $.messager.alert('来自Crm',data.msg,'error');
+            }
+        }
+    });
 }
