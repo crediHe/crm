@@ -10,4 +10,7 @@ public interface UserRoleMapper extends BaseDao<UserRole> {
     public Integer queryRolesByUserId(Integer userId);
 //    删除角色
     public Integer deleteRolesByUserId(Integer userId);
+
+    public Integer deleteUserRolesByRoleId(Integer roleId);
+    public Integer queryUserRolesByRoleId(Integer roleId);
 }

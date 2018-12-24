@@ -16,11 +16,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Administrator on 2018/12/22.
+ * Created by xlf on 2018/9/20.
  */
 @Controller
 @RequestMapping("role")
-public class RoleController extends BaseController{
+public class RoleController extends BaseController {
 
     @Autowired
     private RoleService roleService;
@@ -56,6 +56,13 @@ public class RoleController extends BaseController{
     @ResponseBody
     public ResultInfo saveOrUpdateRole(Role role){
         roleService.saveOrUpdate(role);
+        return success("操作成功");
+    }
+
+    @RequestMapping("deleteRole")
+    @ResponseBody
+    public ResultInfo deleteRole(Integer[] ids){
+        roleService.deleteRole(ids);
         return success("操作成功");
     }
 }

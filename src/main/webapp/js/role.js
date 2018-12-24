@@ -91,7 +91,7 @@ function zTreeOnCheck() {
 }
 
 
-//授权
+//授权a
 function doGrant () {
     $.ajax({
         url: ctx + '/permission/doGrant?'+$('#moduleIds').val(),
@@ -112,4 +112,9 @@ function doGrant () {
             }
         }
     });
+}
+
+// 删除
+function deleteRole() {
+    deleteData('dg',ctx+ '/role/deleteRole',queryRolesByParams);
 }

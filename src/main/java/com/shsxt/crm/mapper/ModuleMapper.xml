@@ -19,29 +19,13 @@
     id, module_name, module_style, url, parent_id, parent_opt_value, grade, opt_value, 
     orders, is_valid, create_date, update_date
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+  <select id="queryById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
     <include refid="Base_Column_List" />
     from t_module
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from t_module
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.shsxt.crm.po.Module" >
-    insert into t_module (id, module_name, module_style, 
-      url, parent_id, parent_opt_value, 
-      grade, opt_value, orders, 
-      is_valid, create_date, update_date
-      )
-    values (#{id,jdbcType=INTEGER}, #{moduleName,jdbcType=VARCHAR}, #{moduleStyle,jdbcType=VARCHAR}, 
-      #{url,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, #{parentOptValue,jdbcType=VARCHAR}, 
-      #{grade,jdbcType=INTEGER}, #{optValue,jdbcType=VARCHAR}, #{orders,jdbcType=INTEGER}, 
-      #{isValid,jdbcType=TINYINT}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.shsxt.crm.po.Module" >
+  <insert id="save" parameterType="com.shsxt.crm.po.Module" >
     insert into t_module
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -120,7 +104,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.shsxt.crm.po.Module" >
+  <update id="update" parameterType="com.shsxt.crm.po.Module" >
     update t_module
     <set >
       <if test="moduleName != null" >
@@ -159,19 +143,38 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.shsxt.crm.po.Module" >
-    update t_module
-    set module_name = #{moduleName,jdbcType=VARCHAR},
-      module_style = #{moduleStyle,jdbcType=VARCHAR},
-      url = #{url,jdbcType=VARCHAR},
-      parent_id = #{parentId,jdbcType=INTEGER},
-      parent_opt_value = #{parentOptValue,jdbcType=VARCHAR},
-      grade = #{grade,jdbcType=INTEGER},
-      opt_value = #{optValue,jdbcType=VARCHAR},
-      orders = #{orders,jdbcType=INTEGER},
-      is_valid = #{isValid,jdbcType=TINYINT},
-      create_date = #{createDate,jdbcType=TIMESTAMP},
-      update_date = #{updateDate,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+
+  <!-- 参数查询 -->
+  <select id="queryByParams" resultMap="BaseResultMap" parameterType="moduleQuery" >
+    select
+    <include refid="Base_Column_List" />
+    from t_module
+    <where>
+      is_valid=1
+      <if test="null!=moduleName and ''!=moduleName">
+        and module_name like concat('%',#{moduleName},'%')
+      </if>
+      <if test="null!=optValue and ''!=optValue">
+        and opt_value like concat('%',#{optValue},'%')
+      </if>
+      <if test="null!=parentId">
+        and parent_id = #{parentId}
+      </if>
+      <if test="null!=grade">
+        and grade = #{grade}
+      </if>
+    </where>
+  </select>
+
+  <!-- 通过grade查询模块 -->
+  <select id="queryModuleByGrade" parameterType="int" resultType="map">
+    SELECT
+    m.id,
+    m.module_name as moduleName
+    FROM
+    t_module AS m
+    WHERE
+    m.is_valid = 1 AND
+    m.grade = #{grade}
+  </select>
 </mapper>

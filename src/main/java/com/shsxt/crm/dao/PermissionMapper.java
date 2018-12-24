@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface PermissionMapper extends BaseDao<Permission> {
     public Integer queryPermissionByRoleId(Integer roleId);
     public Integer deletePermissionByRoleId(Integer roleId);
+
 }

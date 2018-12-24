@@ -139,4 +139,8 @@
     from t_role
     where role_name=#{roleName}
   </select>
+  <!-- 删除角色 -->
+  <update id="delete" parameterType="int">
+    UPDATE t_role set is_valid=0 WHERE id=#{id}
+  </update>
 </mapper>

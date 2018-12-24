@@ -1,6 +1,6 @@
 <html>
 <head>
-<#include "common.ftl" >
+    <#include "common.ftl" >
     <title>Crm | 后台主页</title>
     <script type="text/javascript" src="${ctx}/js/main.js"></script>
 </head>
@@ -56,13 +56,14 @@
             <a href="javascript:logout()" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-exit'" style="width: 150px;">安全退出</a>
             <a href="javascript:openTab('用户信息管理','user/index','icon-user')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-user'" style="width: 150px;">用户信息管理</a>
             <a href="javascript:openTab('角色管理','role/index','icon-user')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-user'" style="width: 150px;">角色管理</a>
+            <a href="javascript:openTab('模块管理','module/index','icon-user')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-user'" style="width: 150px;">模块管理</a>
         </div>
     </div>
 </div>
 <div region="south"  style="height:55px;background-color: #E0ECFF" align="center">
     版本所有 上海尚学堂 <a href="http://www.shsxt.com" target="_blank">www.shsxt.com</a>(2016-2026)<br/>
     上海尚学堂地址：上海市松江区荣乐东路2369弄45号绿地伯顿大厦2层 咨询电话：021-67690939<br/>
-    上海尚学堂智能科技有限公司 的icp备案号 （沪ICP备16053543号）
+	 上海尚学堂智能科技有限公司 的icp备案号 （沪ICP备16053543号）
 </div>
 
 <div id="dlg" class="easyui-dialog" style="width:400px;height:250px;padding: 10px 20px" title="修改密码"
